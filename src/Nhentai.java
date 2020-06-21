@@ -69,10 +69,9 @@ public class Nhentai extends Main {
 				}
 				
 			} catch(IOException e) {
-				System.out.println(">> No internet access.");
+				System.out.println(">> " + e);
 			}
 			
-			System.out.println(">> Download is complete.");
 			System.out.println();
 		}
 	}
@@ -84,7 +83,7 @@ public class Nhentai extends Main {
 			// open stream from first link
 			URL getUrl = new URL("https://nhentai.net" + getAUrl);
 			InputStream is = getUrl.openStream();
-
+			
 			// get second link
 			Document doc2 = Jsoup
 					.connect(getUrl.toString()) // convert URL to string
@@ -94,6 +93,12 @@ public class Nhentai extends Main {
 					.timeout(10*2000)
 					.ignoreHttpErrors(true)
 					.get();
+			
+			// get pages
+			String selectCurrentPage = doc2.select("div#content > section:nth-child(4) > div.reader-pagination >"
+					+ " button > span.current").text();
+			String selectTotalPage = doc2.select("div#content > section:nth-child(4) > div.reader-pagination >"
+					+ " button > span.num-pages").text();
 			
 			// get image element
 			Elements selectImgElements = doc2.select("section#image-container img");
@@ -111,9 +116,10 @@ public class Nhentai extends Main {
 				URLConnection con = getImgUrl.openConnection();
 				con.connect();
 				
-				// get file size
+				// get file size per page and show pages
 				int lengthOfFile = con.getContentLength();
-				System.out.println(">> [" + lengthOfFile / 1024 + "kb]");	
+				System.out.println(">> " + selectCurrentPage + " of " + selectTotalPage
+						+ " [" + lengthOfFile / 1024 + "kb]");	
 				
 				byte[] buffer = new byte[4096];
 				int n = -1;
@@ -130,7 +136,7 @@ public class Nhentai extends Main {
 			}	
 			
 		} catch(IOException e) {
-			System.out.println(">> Error: Access denied.");
+			System.out.println(">> " + e);
 		}
 	}
 	
