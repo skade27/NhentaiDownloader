@@ -17,8 +17,7 @@ public class Main {
 		
 		Nhentai nh = new Nhentai();
 		
-		boolean isTrue = false;
-		do {
+		while(true) {
 			System.out.println(">> [1] NHentai");
 			System.out.print(">> ");
 			int userInput = sc.nextInt();
@@ -26,13 +25,7 @@ public class Main {
 				sc.nextLine();
 				nh.nhentai();
 			}
-		} while(!isTrue);
-		
-		// prevents console from closing
-		try {
-			System.in.read();
-		} catch(IOException e) {
-			e.printStackTrace();
 		}
 	}
+
 }

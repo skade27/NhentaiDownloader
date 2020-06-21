@@ -17,9 +17,7 @@ public class Nhentai extends Main {
 	
 	public static void nhentai() {
 		
-		// ask user while input is false
-		boolean isTrue = false;
-		do {
+		while(true) {
 			try {
 				// ask user for link
 				String url;
@@ -76,7 +74,7 @@ public class Nhentai extends Main {
 			
 			System.out.println(">> Download is complete.");
 			System.out.println();
-		} while(!isTrue);
+		}
 	}
 	
 	
