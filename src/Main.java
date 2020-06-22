@@ -18,13 +18,7 @@ public class Main {
 		Nhentai nh = new Nhentai();
 		
 		while(true) {
-			System.out.println(">> [1] NHentai");
-			System.out.print(">> ");
-			int userInput = sc.nextInt();
-			if(userInput == 1) {
-				sc.nextLine();
-				nh.nhentai();
-			}
+			nh.nhentai();	
 		}
 	}
 
